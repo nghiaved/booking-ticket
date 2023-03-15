@@ -31,7 +31,7 @@ function Login({ loginSuccess }) {
                     </button>
                     <p>
                         Tạo tài khoản?
-                        <Link to={`/${path.REGISTER}`}> Đăng ký</Link>
+                        <Link to={path.REGISTER}> Đăng ký</Link>
                     </p>
                 </form>
             </div>

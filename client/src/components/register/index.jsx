@@ -10,7 +10,7 @@ function Login() {
     const onSubmit = async data => {
         await apiAccountCreate(data)
         alert('Create success')
-        return navigate(`/${path.LOGIN}`)
+        return navigate(path.LOGIN)
     }
 
     return (
@@ -30,7 +30,7 @@ function Login() {
                     </button>
                     <p>
                         Đã có tài khoản?
-                        <Link to={`/${path.LOGIN}`}> Đăng nhập</Link>
+                        <Link to={path.LOGIN}> Đăng nhập</Link>
                     </p>
                 </form>
             </div>
