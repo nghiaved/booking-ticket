@@ -10,7 +10,7 @@ function Login({ loginSuccess }) {
     const navigate = useNavigate()
 
     const onSubmit = async data => {
-        let user = await apiAccountLogin(data)
+        const user = await apiAccountLogin(data)
         if (user && user.data.errCode === 0)
             loginSuccess(user.data.user)
         alert('Login success')

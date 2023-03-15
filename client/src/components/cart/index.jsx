@@ -48,7 +48,7 @@ function Cart({ cart, addCart, deleteCart }) {
                         </div>
                     </div>
                 </div>) :
-                <div>
+                <div className='exist'>
                     Vỏ hàng trống
                     <Link to={`/${path.SCHEDULES}`}>Mua vé</Link>
                 </div>

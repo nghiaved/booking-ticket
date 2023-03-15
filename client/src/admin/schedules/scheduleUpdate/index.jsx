@@ -12,7 +12,7 @@ function ScheduleUpdate() {
     const location = useLocation()
     const schedule = location.state
 
-    let navigate = useNavigate()
+    const navigate = useNavigate()
 
     useEffect(() => {
         fetchData()

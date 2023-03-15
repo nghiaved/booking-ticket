@@ -10,7 +10,7 @@ function MovieUpdate() {
     const location = useLocation()
     const movie = location.state
 
-    let navigate = useNavigate()
+    const navigate = useNavigate()
 
     const onSubmit = async (data, e) => {
         const formData = new FormData()

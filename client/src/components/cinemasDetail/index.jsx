@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import moment from 'moment'
+import { connect } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { addCart } from '../../redux/actions'
 import { apiScheduleSearchCinemas } from '../../services'
+import { path } from '../../utils'
 
-function CinemasDetail() {
+function CinemasDetail({ addCart, isLoggedIn }) {
     const [schedules, setSchedules] = useState([])
+
+    const navigate = useNavigate()
 
     const location = useLocation()
     const _id = location.state
@@ -51,7 +57,14 @@ function CinemasDetail() {
                             </h5>
                         </div>
                         <div className="feature">
-                            <a href="/">Đặt vé</a>
+                            <div onClick={() => {
+                                if (isLoggedIn) {
+                                    addCart(item)
+                                    alert('Đã thêm vé vào giỏ hàng!')
+                                } else {
+                                    navigate(path.LOGIN)
+                                }
+                            }} className='cart'>Thêm</div>
                         </div>
                     </div>
                 </div>) :
@@ -61,4 +74,13 @@ function CinemasDetail() {
     );
 }
 
-export default CinemasDetail;
+
+const mapStateToProps = state => ({
+    isLoggedIn: state.user.isLoggedIn
+})
+
+const mapActionsToProps = {
+    addCart
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(CinemasDetail)

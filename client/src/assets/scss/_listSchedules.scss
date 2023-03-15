@@ -46,5 +46,14 @@
         font-weight: bold;
         color: #cdc197;
         margin: 20vh 0;
+
+        a {
+            margin-left: 20px;
+            color: black;
+
+            &:hover {
+                color: #cdc197;
+            }
+        }
     }
 }

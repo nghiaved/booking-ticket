@@ -12,27 +12,28 @@ const cartReducer = (state = initState, action) => {
             const idCart = state.cartAt.find(
                 p => p._id === action.item._id
             )
-            if (!idCart)
+            if (!idCart) {
                 return {
                     ...state,
                     cartAt: [...state.cartAt, action.item]
                 }
+            }
             else {
-                let newCart = state.cartAt
+                const newCart = state.cartAt
                 const objIndex = newCart.findIndex(
                     obj => obj._id === action.item._id
                 )
                 if (newCart[objIndex].quantity === undefined)
                     newCart[objIndex].quantity = 2
                 else
-                    newCart[objIndex].quantity = newCart[objIndex].quantity + 1
+                    newCart[objIndex].quantity++
                 return {
                     ...state,
                     cartAt: [...newCart]
                 }
             }
         case actionTypes.DELETE_CART:
-            let newCart = state.cartAt
+            const newCart = state.cartAt
             const objIndex = newCart.findIndex(
                 obj => obj._id === action.item._id
             )

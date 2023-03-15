@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import moment from 'moment'
 import { connect } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { addCart } from '../../redux/actions'
 import { apiScheduleRead } from '../../services'
+import { path } from '../../utils'
 
-function Schedules({ addCart }) {
+function Schedules({ addCart, isLoggedIn }) {
     const [schedules, setSchedules] = useState([])
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         fetchData()
@@ -50,8 +54,12 @@ function Schedules({ addCart }) {
                         </div>
                         <div className="feature">
                             <div onClick={() => {
-                                addCart(item)
-                                alert('Đã thêm vé vào giỏ hàng!')
+                                if (isLoggedIn) {
+                                    addCart(item)
+                                    alert('Đã thêm vé vào giỏ hàng!')
+                                } else {
+                                    navigate(path.LOGIN)
+                                }
                             }} className='cart'>Thêm</div>
                         </div>
                     </div>
@@ -61,7 +69,9 @@ function Schedules({ addCart }) {
     );
 }
 
-const mapStateToProps = () => ({})
+const mapStateToProps = state => ({
+    isLoggedIn: state.user.isLoggedIn
+})
 
 const mapActionsToProps = {
     addCart
