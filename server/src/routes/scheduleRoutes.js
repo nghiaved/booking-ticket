@@ -1,5 +1,6 @@
 const express = require('express')
-const { handleRead, handleCreate, handleUpdate, handleDelete, handleSearchMovie, handleSearchCinema } = require('../controllers/ScheduleController')
+const { handleRead, handleCreate, handleUpdate, handleDelete,
+    handleSearchMovie, handleSearchCinema, handleRemainingSchedule } = require('../controllers/ScheduleController')
 
 const router = express.Router()
 
@@ -10,6 +11,7 @@ const scheduleRoutes = app => {
     router.post('/delete', handleDelete)
     router.get('/search/movie', handleSearchMovie)
     router.get('/search/cinema', handleSearchCinema)
+    router.post('/remaining', handleRemainingSchedule)
 
     return app.use('/api/schedule', router)
 }

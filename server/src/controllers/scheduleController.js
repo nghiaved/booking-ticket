@@ -92,4 +92,22 @@ const handleSearchCinema = (req, res, next) => {
         .catch(next)
 }
 
-module.exports = { handleRead, handleCreate, handleUpdate, handleDelete, handleSearchMovie, handleSearchCinema }
+const handleRemainingSchedule = (req, res, next) => {
+    const _id = req.body._id
+    const remaining = req.body.remaining
+    if (!_id)
+        return res.status(500).json({
+            errMessage: 'Please enter full information!'
+        })
+
+    Schedule.updateOne({ _id }, { remaining })
+        .then(schedule => res.status(200).json({
+            schedule
+        }))
+        .catch(next)
+}
+
+module.exports = {
+    handleRead, handleCreate, handleUpdate, handleDelete,
+    handleSearchMovie, handleSearchCinema, handleRemainingSchedule
+}

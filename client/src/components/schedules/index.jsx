@@ -3,7 +3,7 @@ import moment from 'moment'
 import { connect } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { addCart } from '../../redux/actions'
-import { apiScheduleRead } from '../../services'
+import { apiScheduleRead, apiScheduleRemaining } from '../../services'
 import { path } from '../../utils'
 
 function Schedules({ addCart, isLoggedIn }) {
@@ -13,7 +13,7 @@ function Schedules({ addCart, isLoggedIn }) {
 
     useEffect(() => {
         fetchData()
-    }, [])
+    }, [schedules])
 
     const fetchData = async () => {
         const res = await apiScheduleRead()
@@ -56,6 +56,8 @@ function Schedules({ addCart, isLoggedIn }) {
                             <div onClick={() => {
                                 if (isLoggedIn) {
                                     addCart(item)
+                                    item.remaining = item.remaining - 1
+                                    apiScheduleRemaining(item)
                                     alert('Đã thêm vé vào giỏ hàng!')
                                 } else {
                                     navigate(path.LOGIN)

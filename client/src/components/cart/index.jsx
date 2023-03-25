@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { path } from '../../utils'
 import { addCart, deleteCart } from '../../redux/actions'
+import { apiScheduleRemaining } from '../../services'
 
 function Cart({ cart, addCart, deleteCart }) {
     return (
@@ -34,13 +35,19 @@ function Cart({ cart, addCart, deleteCart }) {
                             </h4>
                         </div>
                         <div className="feature">
-                            <div onClick={() => addCart(item)} className='cart'>Thêm</div>
+                            <div onClick={() => {
+                                addCart(item)
+                                item.remaining = item.remaining - 1
+                                apiScheduleRemaining(item)
+                            }} className='cart'>Thêm</div>
                             <div onClick={() => {
                                 alert('Thanh toán!')
                             }} className='cart'>Thanh toán</div>
                             <button onClick={() => {
                                 if (window.confirm("Xóa vĩnh viễn?")) {
                                     deleteCart(item)
+                                    item.remaining = item.number
+                                    apiScheduleRemaining(item)
                                 }
                             }}>
                                 <i className='fas fa-trash'></i>

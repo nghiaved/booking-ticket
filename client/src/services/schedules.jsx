@@ -17,3 +17,6 @@ export const apiScheduleSearchMovies = id =>
 
 export const apiScheduleSearchCinemas = id =>
     axiosClient.get('/api/schedule/search/cinema?_id=' + id)
+
+export const apiScheduleRemaining = data =>
+    axiosClient.post('/api/schedule/remaining', data)
