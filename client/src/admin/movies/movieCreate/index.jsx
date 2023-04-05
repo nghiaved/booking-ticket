@@ -9,9 +9,13 @@ function MovieCreate() {
         const formData = new FormData()
         formData.append('file', data.file[0])
         formData.append('title', data.title)
-        await apiMovieCreate(formData)
-        alert('Create success')
-        e.target.reset()
+        try {
+            await apiMovieCreate(formData)
+            alert('Create success')
+            e.target.reset()
+        } catch (error) {
+            alert('Create failure')
+        }
     }
 
     return (

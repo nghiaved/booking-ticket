@@ -6,9 +6,13 @@ function AccountCreate() {
     const { register, handleSubmit, getValues } = useForm()
 
     const onSubmit = async (data, e) => {
-        await apiAccountCreate(data)
-        alert('Create success')
-        e.target.reset()
+        try {
+            await apiAccountCreate(data)
+            alert('Create success')
+            e.target.reset()
+        } catch (error) {
+            alert('Create failure')
+        }
     }
 
     return (

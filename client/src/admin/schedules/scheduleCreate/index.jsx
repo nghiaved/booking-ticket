@@ -21,9 +21,13 @@ function ScheduleCreate() {
     const onSubmit = async (data, e) => {
         data.movie = JSON.parse(data.movie)
         data.cinema = JSON.parse(data.cinema)
-        await apiScheduleCreate(data)
-        alert('Create success')
-        e.target.reset()
+        try {
+            await apiScheduleCreate(data)
+            alert('Create success')
+            e.target.reset()
+        } catch (error) {
+            alert('Create failure')
+        }
     }
 
     return (

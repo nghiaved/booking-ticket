@@ -9,9 +9,13 @@ function CinemaCreate() {
         const formData = new FormData()
         formData.append('file', data.file[0])
         formData.append('location', data.location)
-        await apiCinemaCreate(formData)
-        alert('Create success')
-        e.target.reset()
+        try {
+            await apiCinemaCreate(formData)
+            alert('Create success')
+            e.target.reset()
+        } catch (error) {
+            alert('Create failure')
+        }
     }
 
     return (

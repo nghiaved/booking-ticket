@@ -8,9 +8,13 @@ function Login() {
     const navigate = useNavigate()
 
     const onSubmit = async data => {
-        await apiAccountCreate(data)
-        alert('Create success')
-        return navigate(path.LOGIN)
+        try {
+            await apiAccountCreate(data)
+            alert('Create success')
+            return navigate(path.LOGIN)
+        } catch (error) {
+            alert('Create failure')
+        }
     }
 
     return (
@@ -22,9 +26,9 @@ function Login() {
                     </div>
                     <input {...register('fullname', { required: true })} type="text" placeholder="Tên đầy đủ" />
                     <input {...register('username', { required: true })} type="text" placeholder="Tài khoản" />
-                    <input {...register('password', { required: true })} type="text" placeholder="Mật khẩu" />
+                    <input {...register('password', { required: true })} type="password" placeholder="Mật khẩu" />
                     <input {...register("cpassword", { validate: value => value === getValues("password") })}
-                        type="text" placeholder="Nhập lại mật khẩu" />
+                        type="password" placeholder="Nhập lại mật khẩu" />
                     <button>
                         Đăng ký
                     </button>

@@ -10,11 +10,15 @@ function Login({ loginSuccess }) {
     const navigate = useNavigate()
 
     const onSubmit = async data => {
-        const user = await apiAccountLogin(data)
-        if (user && user.data.errCode === 0)
-            loginSuccess(user.data.user)
-        alert('Login success')
-        navigate(-1)
+        try {
+            const user = await apiAccountLogin(data)
+            if (user && user.data.errCode === 0)
+                loginSuccess(user.data.user)
+            alert('Login success')
+            navigate(-1)
+        } catch (error) {
+            alert('Login failure')
+        }
     }
 
     return (
@@ -25,7 +29,7 @@ function Login({ loginSuccess }) {
                         Đăng nhập
                     </div>
                     <input {...register('username', { required: true })} type="text" placeholder="Tài khoản" />
-                    <input {...register('password', { required: true })} type="text" placeholder="Mật khẩu" />
+                    <input {...register('password', { required: true })} type="password" placeholder="Mật khẩu" />
                     <button>
                         Đăng nhập
                     </button>
