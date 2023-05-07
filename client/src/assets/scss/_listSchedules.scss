@@ -11,6 +11,10 @@
             margin: 10px;
             border: 1px solid #dedede;
 
+            &.pay {
+                height: 95%;
+            }
+
             .row {
                 display: flex;
                 justify-content: space-between;

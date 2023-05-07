@@ -14,7 +14,7 @@ function Header({ processLogout, isLoggedIn, userInfo }) {
                 <div className='top-container'>
                     <div className='item-left'>
                         <div className='left-item'>
-                            <Link target="_blank" to='https://www.facebook.com/youngestor'>
+                            <Link target="_blank" to='https://www.facebook.com/profile.php?id=100091142327056'>
                                 <i className="fa-brands fa-square-facebook"></i>
                                 Facebook
                             </Link>
@@ -48,12 +48,12 @@ function Header({ processLogout, isLoggedIn, userInfo }) {
                                     </div>
                                     {user &&
                                         <div className='user-action'>
+                                            <div className='item'>
+                                                <Link to={path.CART}>Giỏ hàng</Link>
+                                            </div>
                                             {userInfo && userInfo.username === 'admin' &&
                                                 <Link to={path.ADMIN} className='item'>Quản lý</Link>
                                             }
-                                            <div className='item'>
-                                                <Link to={path.CART}>Vỏ hàng</Link>
-                                            </div>
                                         </div>
                                     }
                                 </div>
