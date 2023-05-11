@@ -4,7 +4,7 @@ import moment from 'moment'
 import { connect } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { addCart } from '../../redux/actions'
-import { apiScheduleSearchCinemas } from '../../services'
+import { apiScheduleSearchCinemas, apiScheduleRemaining } from '../../services'
 import { path } from '../../utils'
 
 function CinemasDetail({ addCart, isLoggedIn }) {
@@ -17,7 +17,7 @@ function CinemasDetail({ addCart, isLoggedIn }) {
 
     useEffect(() => {
         fetchData(_id)
-    }, [_id])
+    }, [_id, schedules])
 
     const fetchData = async id => {
         const res = await apiScheduleSearchCinemas(id)
@@ -60,6 +60,8 @@ function CinemasDetail({ addCart, isLoggedIn }) {
                             <div onClick={() => {
                                 if (isLoggedIn) {
                                     addCart(item)
+                                    item.remaining = item.remaining - 1
+                                    apiScheduleRemaining(item)
                                     alert('Đã thêm vé vào giỏ hàng!')
                                 } else {
                                     navigate(path.LOGIN)
